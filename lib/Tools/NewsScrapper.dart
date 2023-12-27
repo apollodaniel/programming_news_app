@@ -1,5 +1,5 @@
 import 'package:chaleno/chaleno.dart';
-import 'package:programming_news_app/News/NewsBase.dart';
+import 'package:programming_news_app/Tools/NewsBase.dart';
 
 class NewsScrapper{
 

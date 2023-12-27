@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:programming_news_app/News/NewsBase.dart';
-import 'package:programming_news_app/News/NewsScrapper.dart';
+import 'package:programming_news_app/Tools/NewsBase.dart';
+import 'package:programming_news_app/Tools/NewsScrapper.dart';
 part 'HomeController.g.dart';
 
 class HomeController= HomeControllerBase with _$HomeController;
