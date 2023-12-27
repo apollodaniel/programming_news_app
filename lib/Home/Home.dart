@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
             child: Wrap(
               children: homeController.news.map(
                 (element) => Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
                     onTap: ()=>launchUrlString(element.url),
@@ -44,35 +44,42 @@ class _HomeState extends State<Home> {
                       aspectRatio: 1.2/1,
                       child: Ink(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
+                          image: DecorationImage(
+                            image: NetworkImage(element.image),
+                            fit: BoxFit.cover
+                          ),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            width: 1
+                          ),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         width: double.infinity,
-                        padding: EdgeInsets.all(20),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                element.title.trim(), 
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w400
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              left: 0,
+                              child: Container(
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    element.title.trim(), 
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
+                                padding: EdgeInsets.only(bottom: 16, left: 16, right: 16, top: 16),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.background.withOpacity(0.8),
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), bottomRight: Radius.circular(12))
                                 ),
                               ),
                             ),
-                            if(element.image != "") Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  image: DecorationImage(
-                                    image: NetworkImage(element.image),
-                                    fit: BoxFit.cover
-                                  )
-                                ),
-                              )
-                            )
                           ],
                         ),
                       ),

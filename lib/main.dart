@@ -15,7 +15,7 @@ class ProgrammerNewsApp extends StatelessWidget {
     return MaterialApp(
       home: const Home(),
       theme: ThemeData(
-        colorSchemeSeed: Colors.purple,
+        colorSchemeSeed: Colors.red,
         brightness: Brightness.dark,
       ),
     );
