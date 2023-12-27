@@ -20,7 +20,7 @@ class NewsScrapper{
 
       List<String> names = result.map((e) => e.querySelector(".tec--card__title__link") == null ? "No name" : e.querySelector(".tec--card__title__link")!.text ?? "No name" ).toList();
       List<String> links = result.map((e) => e.querySelector(".tec--card__title__link") == null ? TECH_MUNDO_URL : e.querySelector(".tec--card__title__link")!.href ?? TECH_MUNDO_URL).toList();
-      List<String> images = result.map((e) => e.querySelector(".tec--card__thumb__image") == null ? "No image" : e.querySelector(".tec--card__title__link")!.href ?? "No image").toList();
+      List<String> images = result.map((e) => e.querySelector(".tec--card__thumb__image") == null ? "" : e.querySelector(".tec--card__title__link")!.href ?? "").toList();
 
       for(int i = 0;i < result.length; i++){
         techmundo_news.add(
@@ -38,7 +38,7 @@ class NewsScrapper{
       
       List<String> names = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? "No name" : e.querySelector(".large-5,.columns")!.querySelector("h3")!.querySelector("a")!.text ?? "No name").toList();
       List<String> links = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? SILICON_REPUBLIC_URL : e.querySelector(".large-5, .columns")!.querySelector("h3")!.querySelector("a")!.href ?? SILICON_REPUBLIC_URL).toList();
-      List<String> images = result.map((e) => e.querySelector(".large-7,.columns, .nopadding")!.querySelector("picture")  == null ? "No image" : e.querySelector(".large-7, .columns, .nopadding")!.querySelector("picture")!.querySelector("img")!.src ?? "No image").toList();
+      List<String> images = result.map((e) => e.querySelector(".large-7,.columns, .nopadding")!.querySelector("picture")  == null ? "" : e.querySelector(".large-7, .columns, .nopadding")!.querySelector("picture")!.querySelector("img")!.src ?? "").toList();
 
       for(int i = 0;i < result.length; i++){
         silicon_repuplic_news.add(
@@ -56,7 +56,7 @@ class NewsScrapper{
       
       List<String> names = result.map((e) => e.querySelector(".entry-title")!.querySelector("a") == null ? "No name" : e.querySelector(".entry-title")!.querySelector("a")!.text ?? "No name").toList();
       List<String> links = result.map((e) => e.querySelector(".entry-title")!.querySelector("a") == null ? OMG_LINUX_URL : e.querySelector(".entry-title")!.querySelector("a")!.href ?? OMG_LINUX_URL).toList();
-      List<String> images = result.map((e) => e.querySelector(".post-thumbnail")!.querySelector("img")  == null ? "No image" : e.querySelector(".post-thumbnail")!.querySelector("img")!.src ?? "No image").toList();
+      List<String> images = result.map((e) => e.querySelector(".post-thumbnail")!.querySelector("img")  == null ? "" : e.querySelector(".post-thumbnail")!.querySelector("img")!.src ?? "").toList();
 
       for(int i = 0;i < result.length; i++){
         omg_linux_news.add(
@@ -75,7 +75,7 @@ class NewsScrapper{
       // e.querySelector("a") == null ? "No name" : e.querySelector("a")!.text ?? "No name"
       List<String> names = result.map((e) => e.querySelector(".post-cont")!.querySelector("h3") == null ? "No name" : e.querySelector(".post-cont")!.querySelector("h3")!.querySelector("a")!.text ?? "No name").toList();
       List<String> links = result.map((e) => e.querySelector(".post-cont")!.querySelector("h3") == null ? INFO_WORLD_URL : "$INFO_WORLD_BASE_URL${e.querySelector(".post-cont")!.querySelector("h3")!.querySelector("a")!.href??""}").toList();
-      List<String> images = result.map((e) => e.querySelector(".well-img")!.querySelector("a")  == null ? "No image" : e.querySelector(".well-img")!.querySelector("a")!.querySelector("img")!.attr("data-original").toString()).toList();
+      List<String> images = result.map((e) => e.querySelector(".well-img")!.querySelector("a")  == null ? "" : e.querySelector(".well-img")!.querySelector("a")!.querySelector("img")!.attr("data-original").toString()).toList();
 
       for(int i = 0;i < result.length; i++){
         info_world_news.add(
