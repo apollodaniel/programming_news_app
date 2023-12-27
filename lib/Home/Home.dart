@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(16.0),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(12),
-                    onTap: ()=>launchUrlString(element.url),
+                    onTap: () => Navigator.pushNamed(context, "/fullscreenView", arguments: element),
                     child: AspectRatio(
                       aspectRatio: 1.2/1,
                       child: Ink(
