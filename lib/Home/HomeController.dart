@@ -15,7 +15,11 @@ abstract class HomeControllerBase with Store{
   @observable
   Brightness appBrightness = Brightness.dark;
 
+  @observable
+  bool showGoHomeButton = false;
+
   SharedPreferences? sh;
+
 
   initSharedPreferences()async{
     sh = await SharedPreferences.getInstance();
@@ -38,6 +42,9 @@ abstract class HomeControllerBase with Store{
     bool isDarkMode = sh!.getBool("isDarkMode") ?? true;
     changeAppBrightness(isDarkMode ? Brightness.dark : Brightness.light);
   }
+
+  @action
+  changeShowGoHomeButton(value) => showGoHomeButton = value;
 
   @action
   getNews()async{

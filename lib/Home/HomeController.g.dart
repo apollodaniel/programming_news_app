@@ -41,6 +41,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$showGoHomeButtonAtom =
+      Atom(name: 'HomeControllerBase.showGoHomeButton', context: context);
+
+  @override
+  bool get showGoHomeButton {
+    _$showGoHomeButtonAtom.reportRead();
+    return super.showGoHomeButton;
+  }
+
+  @override
+  set showGoHomeButton(bool value) {
+    _$showGoHomeButtonAtom.reportWrite(value, super.showGoHomeButton, () {
+      super.showGoHomeButton = value;
+    });
+  }
+
   late final _$getNewsAsyncAction =
       AsyncAction('HomeControllerBase.getNews', context: context);
 
@@ -64,10 +80,22 @@ mixin _$HomeController on HomeControllerBase, Store {
   }
 
   @override
+  dynamic changeShowGoHomeButton(dynamic value) {
+    final _$actionInfo = _$HomeControllerBaseActionController.startAction(
+        name: 'HomeControllerBase.changeShowGoHomeButton');
+    try {
+      return super.changeShowGoHomeButton(value);
+    } finally {
+      _$HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 news: ${news},
-appBrightness: ${appBrightness}
+appBrightness: ${appBrightness},
+showGoHomeButton: ${showGoHomeButton}
     ''';
   }
 }
