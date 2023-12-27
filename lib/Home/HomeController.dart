@@ -12,7 +12,11 @@ abstract class HomeControllerBase with Store{
 
   @action
   getNews()async{
-    news = ObservableList.of(await NewsScrapper.scrapAll());
+    news.clear();
+    news.addAll(await NewsScrapper.scrapTechmundoNews());
+    news.addAll(await NewsScrapper.scrapSiliconRepublic());
+    news.addAll(await NewsScrapper.scrapOMGLinux());
+    news.addAll(await NewsScrapper.scrapInfoWorld());
   }
 
 }

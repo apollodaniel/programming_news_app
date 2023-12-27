@@ -34,11 +34,11 @@ class NewsScrapper{
     Parser? parser = await chaleno.load(SILICON_REPUBLIC_URL);
     List<NewsBase> silicon_repuplic_news = [];
     if(parser!=null){
-      List<Result> result = parser.getElementsByClassName("topicbox nocontent nopadding large-12 medium-12 small-12 columns end last");
+      List<Result> result = parser.getElementsByClassName("topicbox nocontent  start-ups   nopadding large-12 medium-12 small-12 columns end last");
       
-      List<String> names = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? "No name" : e.querySelector(".large-5, .columns")!.querySelector("a")!.text ?? "No name").toList();
-      List<String> links = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? SILICON_REPUBLIC_URL : e.querySelector(".large-5, .columns")!.querySelector("a")!.href ?? SILICON_REPUBLIC_URL).toList();
-      List<String> images = result.map((e) => e.querySelector(".large-7,.columns, .nopadding")!.querySelector("picture")  == null ? "No image" : e.querySelector(".large-7, .columns, .nopadding")!.querySelector("picture")!.src ?? "No image").toList();
+      List<String> names = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? "No name" : e.querySelector(".large-5,.columns")!.querySelector("h3")!.querySelector("a")!.text ?? "No name").toList();
+      List<String> links = result.map((e) => e.querySelector(".large-5,.columns")!.querySelector("a") == null ? SILICON_REPUBLIC_URL : e.querySelector(".large-5, .columns")!.querySelector("h3")!.querySelector("a")!.href ?? SILICON_REPUBLIC_URL).toList();
+      List<String> images = result.map((e) => e.querySelector(".large-7,.columns, .nopadding")!.querySelector("picture")  == null ? "No image" : e.querySelector(".large-7, .columns, .nopadding")!.querySelector("picture")!.querySelector("img")!.src ?? "No image").toList();
 
       for(int i = 0;i < result.length; i++){
         silicon_repuplic_news.add(
@@ -73,9 +73,9 @@ class NewsScrapper{
     if(parser!=null){
       List<Result> result = parser.getElementsByClassName("river-well article");
       // e.querySelector("a") == null ? "No name" : e.querySelector("a")!.text ?? "No name"
-      List<String> names = result.map((e) => e.querySelector(".post-cont")!.querySelector("a") == null ? "No name" : e.querySelector(".post-cont")!.querySelector("a")!.text ?? "No name").toList();
-      List<String> links = result.map((e) => e.querySelector(".post-cont")!.querySelector("a") == null ? INFO_WORLD_URL : "$INFO_WORLD_BASE_URL${e.querySelector(".post-cont")!.querySelector("a")!.href??""}").toList();
-      List<String> images = result.map((e) => e.querySelector(".well-img")!.querySelector(".lazy")  == null ? "No image" : e.querySelector(".well-img")!.querySelector(".lazy")!.src ?? "No image").toList();
+      List<String> names = result.map((e) => e.querySelector(".post-cont")!.querySelector("h3") == null ? "No name" : e.querySelector(".post-cont")!.querySelector("h3")!.querySelector("a")!.text ?? "No name").toList();
+      List<String> links = result.map((e) => e.querySelector(".post-cont")!.querySelector("h3") == null ? INFO_WORLD_URL : "$INFO_WORLD_BASE_URL${e.querySelector(".post-cont")!.querySelector("h3")!.querySelector("a")!.href??""}").toList();
+      List<String> images = result.map((e) => e.querySelector(".well-img")!.querySelector("a")  == null ? "No image" : e.querySelector(".well-img")!.querySelector("a")!.querySelector("img")!.attr("data-original").toString()).toList();
 
       for(int i = 0;i < result.length; i++){
         info_world_news.add(
@@ -86,12 +86,4 @@ class NewsScrapper{
     return info_world_news;
   }
 
-  static Future<List<NewsBase>> scrapAll()async{
-    List<NewsBase> allNews = [];
-    allNews.addAll(await scrapTechmundoNews());
-    allNews.addAll(await scrapSiliconRepublic());
-    allNews.addAll(await scrapOMGLinux());
-    allNews.addAll(await scrapInfoWorld());
-    return allNews;
-  }
 }
