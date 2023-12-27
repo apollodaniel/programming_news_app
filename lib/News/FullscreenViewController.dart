@@ -9,9 +9,6 @@ abstract class FullscreenViewControllerBase with Store{
   int progress = 0;
 
   @action
-  changeProgess(value) {
-    progress = value;
-    print(progress);
-  }
+  changeProgess(value) => progress = value;
 
 }

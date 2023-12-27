@@ -48,10 +48,7 @@ class _HomeState extends State<Home> {
                             image: NetworkImage(element.image),
                             fit: BoxFit.cover
                           ),
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.onBackground,
-                            width: 1
-                          ),
+                          
                           borderRadius: BorderRadius.circular(12),
                         ),
                         width: double.infinity,

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:programming_news_app/News/FullscreenViewController.dart';
 import 'package:programming_news_app/Tools/NewsBase.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class FullscreenView extends StatefulWidget {
@@ -47,6 +51,27 @@ class _FullscreenViewState extends State<FullscreenView> {
       appBar: AppBar(
         title: Text(widget.news.title),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.link),
+            onPressed: ()async{
+              await Clipboard.setData(ClipboardData(text: widget.news.url));
+              showTopSnackBar(
+                snackBarPosition: SnackBarPosition.bottom,
+                Overlay.of(context),
+                CustomSnackBar.info(
+                  message: "Website link copied to clipboard",
+                  backgroundColor: Theme.of(context).primaryColor,
+                  icon: Container(),
+                )
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.open_in_browser),
+            onPressed: () => launchUrlString(widget.news.url),
+          )
+        ],
       ),
       body: Stack(
         children: [
