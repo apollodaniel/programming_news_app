@@ -25,6 +25,22 @@ mixin _$HomeController on HomeControllerBase, Store {
     });
   }
 
+  late final _$appBrightnessAtom =
+      Atom(name: 'HomeControllerBase.appBrightness', context: context);
+
+  @override
+  Brightness get appBrightness {
+    _$appBrightnessAtom.reportRead();
+    return super.appBrightness;
+  }
+
+  @override
+  set appBrightness(Brightness value) {
+    _$appBrightnessAtom.reportWrite(value, super.appBrightness, () {
+      super.appBrightness = value;
+    });
+  }
+
   late final _$getNewsAsyncAction =
       AsyncAction('HomeControllerBase.getNews', context: context);
 
@@ -33,10 +49,25 @@ mixin _$HomeController on HomeControllerBase, Store {
     return _$getNewsAsyncAction.run(() => super.getNews());
   }
 
+  late final _$HomeControllerBaseActionController =
+      ActionController(name: 'HomeControllerBase', context: context);
+
+  @override
+  dynamic changeAppBrightness(Brightness brightness) {
+    final _$actionInfo = _$HomeControllerBaseActionController.startAction(
+        name: 'HomeControllerBase.changeAppBrightness');
+    try {
+      return super.changeAppBrightness(brightness);
+    } finally {
+      _$HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-news: ${news}
+news: ${news},
+appBrightness: ${appBrightness}
     ''';
   }
 }

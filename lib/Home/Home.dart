@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:programming_news_app/Home/HomeController.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class Home extends StatefulWidget {
@@ -11,13 +12,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  HomeController homeController = HomeController();
-  
+  late HomeController homeController;
+
+
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    homeController.getNews();
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    homeController = Provider.of<HomeController>(context);
+    homeController.initSharedPreferences();
+    homeController.getNews();  
   }
 
   @override
@@ -27,6 +31,13 @@ class _HomeState extends State<Home> {
         title: Text("Latest news"),
         centerTitle: true,
         actions: [
+          Observer(
+            builder: (context) => 
+            IconButton(
+              onPressed: ()=>homeController.changeAppBrightness(homeController.appBrightness == Brightness.dark ? Brightness.light : Brightness.dark),
+              icon: Icon(homeController.appBrightness == Brightness.dark ? Icons.light_mode : Icons.dark_mode)
+            )
+          ),
           IconButton(onPressed: ()=>homeController.getNews(), icon: Icon(Icons.update))
         ],
       ),
