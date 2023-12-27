@@ -26,17 +26,61 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("Latest news"),
         centerTitle: true,
+        actions: [
+          IconButton(onPressed: ()=>homeController.getNews(), icon: Icon(Icons.update))
+        ],
       ),
       body: Observer(
         builder: (context) {
-          return ListView.builder(
-            itemCount: homeController.news.length,
-            itemBuilder: (context, index) => 
-              ListTile(
-                title: Text(homeController.news[index].title),
-                leading: homeController.news[index].image == "" ? null : Image.network(homeController.news[index].image),
-                onTap: () => launchUrlString(homeController.news[index].url),
-              ),
+          return SingleChildScrollView(
+            child: Wrap(
+              children: homeController.news.map(
+                (element) => Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: ()=>launchUrlString(element.url),
+                    child: AspectRatio(
+                      aspectRatio: 1.2/1,
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        width: double.infinity,
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Text(
+                                element.title.trim(), 
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w400
+                                ),
+                              ),
+                            ),
+                            if(element.image != "") Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  image: DecorationImage(
+                                    image: NetworkImage(element.image),
+                                    fit: BoxFit.cover
+                                  )
+                                ),
+                              )
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ), 
+              ).toList()
+            ),
           );
         }
       ),

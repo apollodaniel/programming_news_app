@@ -12,8 +12,12 @@ class ProgrammerNewsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Home()
+    return MaterialApp(
+      home: const Home(),
+      theme: ThemeData(
+        colorSchemeSeed: Colors.purple,
+        brightness: Brightness.dark,
+      ),
     );
   }
 }
